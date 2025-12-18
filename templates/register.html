@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% from "includes/formhelpers.html" import render_field %}
+     
+   
+  
+        <!--form control eklenerek ön yüz makyajlanabilir-->
+        
+        </section><!-- /Blog Comments Section -->
+
+          <!-- Blog Comment Form Section -->
+          <section id="blog-comment-form" class="blog-comment-form section">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+              <form method="post" role="form" enctype="multipart/form-data">
+               
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="section-header">
+                  <h3>Kayıt Olun</h3>
+                  <p>Kendi makalelerinizi yayınlamak için kayıt olun</p>
+                </div>
+
+                <div class="row gy-3">
+                  <div class="col-md-6 form-group">
+                   
+                    {{ render_field(form.name,class = "form-control",placeholder="Adınızı Soyadınızı Giriniz") }}
+                  </div>
+                   <div class="col-md-6 form-group">
+                   
+                    {{ render_field(form.job,class = "form-control",placeholder="İşinizi Giriniz") }}
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    
+                   {{ render_field(form.username,class = "form-control",placeholder="Kullanıcı Adınızı Giriniz") }}
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    
+                   {{ render_field(form.email,class = "form-control",placeholder="E-Posta Adresinizi Giriniz") }}
+                  </div>
+                  
+                  <div class="col-md-6 form-group">
+                   
+                   {{ render_field(form.password,class = "form-control",placeholder="Parola Belirleyin") }}
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    
+                   {{ render_field(form.confirm,class = "form-control",placeholder="Parolanızı Doğrulayın") }}
+                  </div>
+                  <div class="form-group">
+                    <label for="profile_photo">Profil Fotoğrafı (isteğe bağlı)</label>
+                    <input type="file" name="profile_photo" id="profile_photo" class="form-control">
+                  </div>
+
+                  
+                  <div class="col-12 text-center">
+                    <div class="col-12 text-center mt-3">
+                           <p>Hesabınız var mı? 
+                            <a href="{{ url_for('login') }}" style="color: var(--accent-color); font-weight: 500;">
+                            Hemen giriş yapın
+                             </a>
+                                </p>
+                            </div>
+
+                    <button type="submit" class="btn-submit">Kayıt Ol</button>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+
+          </section><!-- /Blog Comment Form Section -->
+        
+
+     
+    
+
+
+{% endblock body %}

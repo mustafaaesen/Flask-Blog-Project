@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h3>Hakkında</h3>
+  <main class="main">
+
+    <!-- Page Title -->
+
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <span class="section-badge"><i class="bi bi-info-circle"></i> Proje Hakkında</span>
+        <div class="row">
+          <div class="col-lg-6">
+            <h2 class="about-title">Flask ile Geliştirilen Dinamik Makale Paylaşım Platformu</h2>
+            <p class="about-description">Bu proje, kullanıcıların kendi makalelerini oluşturabildiği, güncelleyebildiği ve silebildiği basit ama güçlü bir web uygulamasıdır.  
+Flask framework’ü kullanılarak geliştirilmiş olup, kullanıcı yönetimi, oturum açma, kontrol paneli ve bildirim mekanizmaları içermektedir.</p>
+          </div>
+          <div class="col-lg-6">
+            <p class="about-text">Proje, Flask altyapısını temel alarak dinamik içerik yönetimi sağlar.  
+Her kullanıcı kendi hesabı üzerinden sisteme giriş yapabilir, makalelerini oluşturabilir ve düzenleyebilir.  
+Veriler güvenli bir şekilde veritabanında saklanır ve her kullanıcıya özel kontrol paneli sunulur.</p>
+            <p class="about-text">Uygulama, geliştirme sürecinde hem eğitim hem de üretim odaklı düşünülmüştür.  
+Amaç, Python’un Flask framework’ü ile tam işlevsel bir CRUD (Create, Read, Update, Delete) yapısının nasıl geliştirileceğini pratik bir örnek üzerinden göstermektir.</p>
+          </div>
+        </div>
+
+        <div class="row features-boxes gy-4 mt-3">
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-box">
+              <div class="icon-box">
+                <i class="bi bi-bullseye"></i>
+              </div>
+              <h3><a href="#" class="stretched-link">Makale Yönetimi</a></h3>
+              <p>Kullanıcılar kendi makalelerini oluşturabilir, düzenleyebilir ve silebilir. Tüm işlemler kullanıcı paneli üzerinden yapılır.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-box">
+              <div class="icon-box">
+                <i class="bi bi-person-check"></i>
+              </div>
+              <h3><a href="#" class="stretched-link">Kullanıcı Oturum Sistemi</a></h3>
+              <p>Flask’in oturum yapısı kullanılarak kullanıcı girişi ve kimlik doğrulama işlemleri güvenli biçimde gerçekleştirilir.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="feature-box">
+              <div class="icon-box">
+                <i class="bi bi-clipboard-data"></i>
+              </div>
+              <h3><a href="#" class="stretched-link">Genişletilebilir Mimari</a></h3>
+              <p>Proje yapısı; kategori yönetimi, yorum sistemi veya görsel yükleme gibi yeni özelliklerin kolayca eklenebileceği şekilde tasarlanmıştır.</p>
+            </div>
+          </div>
+        </div>
+
+      
+
+      </div>
+
+    </section><!-- /About Section -->
+
+
+  </main>
+
+{% endblock body %}

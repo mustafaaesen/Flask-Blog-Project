@@ -1,0 +1,61 @@
+  <header id="header" class="header position-relative">
+    <div class="container-fluid container-xl position-relative">
+
+      <div class="top-row d-flex align-items-center justify-content-between">
+        <a href="/" class="logo d-flex align-items-end">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.webp" alt=""> -->
+          <h1 class="Flask Blog Sitesi">Flask Blog</h1><span>.</span>
+        </a>
+
+        <div class="d-flex align-items-center">
+          <div class="social-links">
+            <a href="https://github.com/mustafaaesen" class="github"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/mustafaesen" class="linkedın"><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/mustafaaesen" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.linkedin.com/in/mustafaesen" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="https://github.com/mustafaaesen" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://medium.com/@mustafaaeesen" class="medium"><i class="bi bi-medium"></i></a>
+          </div>
+
+          <form action="/search"class="search-form ms-4"method="POST">
+
+            <input type="text" name="keyword" maxlength="64" placeholder="Makale Ara..." class="form-control">
+            <button type="submit" class="btn"><i class="bi bi-search"></i></button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="nav-wrap">
+      <div class="container d-flex justify-content-center position-relative">
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/" class="active">Ansayfa</a></li>
+            <li><a href="/about">Hakkında</a></li>
+            <li><a href="/articles">Makalaler</a></li>
+              
+        
+            {% if session["logged_in"] %}
+
+             <li><a href="/dashboard">Kontrol Panaeli</a></li>
+             <li><a href="/logout">Çıkış Yap</a></li>
+            {% else %}
+            <li><a href="/login">Giriş Yap</a></li>
+           
+
+
+            {% endif %}
+              <li><a href="/register">Kayıt Ol</a></li>
+            
+            
+          
+            <li><a href="/contact">İletişim</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+
+  </header>

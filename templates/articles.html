@@ -1,0 +1,155 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h3>Makaleler</h3>
+<hr>
+
+<main class="main">
+
+  
+
+   <div class="container">
+      <div class="row">
+
+        <div class="col-lg-8">
+
+              <!-- Category Postst Section -->
+          <section id="category-postst" class="category-postst section">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+              <div class="row gy-4">
+<!--articles fonksiyonundan result >0 ise yani makale varsa articles gelir yoksa gelmez bu yüzden burada
+da kontrol yapılması gerekmektedir  --->
+
+                   {% if  articles %}<!---articles gelme durumu varsa doğrudur
+her artcile üzerinde gezinip bilgileri yazdırılabilir-->
+
+                        {% for article in articles  %}
+
+                        
+                              <div class="col-lg-6" >
+                              <article >
+
+                                <div class="post-img">
+                                  <img src="{{ url_for('static', filename='uploads/article_images/' + article['article_image']) }}" alt="" class="img-fluid w-100 h-100 object-fit-cover rounded">
+                                </div>
+
+                              
+
+                                <h2 class="title">
+                                  <a href="/article/{{article.id}}" >{{article.title}}</a>
+                                </h2>
+
+                                <div class="d-flex align-items-center">
+                                  <img src="{{ url_for('static', filename='uploads/profile_pics/' + article['profile_pic']) }}" alt="" class="img-fluid post-author-img flex-shrink-0">
+                                  <div class="post-meta">
+                                    <p class="post-author">{{article.author}}</p>
+                                    <p class="post-date">
+                                      <time datetime="2022-01-01">{{article.created_date}}</time>
+                                    </p>
+                                  </div>
+                                </div>
+
+                              </article>
+                              </div><!-- End post list item -->
+              
+                        {% endfor %}
+                       
+
+                        {% else %}
+<!---makale gelmemiştri bilgilendirme mesajı yayınlanabilir-->
+                        <div class="alert alert-danger">Bu blogda henüz makale bulunmuyor</div>
+
+                        {% endif %}
+
+ 
+          
+                  
+                     </div>
+                  </div>
+
+               </section><!-- /Category Postst Section -->
+
+          <!-- Pagination 2 Section -->
+          <section id="pagination-2" class="pagination-2 section">
+
+            <div class="container">
+              <div class="d-flex justify-content-center">
+                <ul class="pagination">
+
+                  {% if page>1 %}<!--sayfa sayısı 1 den büyükse önceki butonu görünür-->
+                  
+                     <li>
+                        <a class="page-link" href="{{url_for('articles',page=page-1)}}">
+                            <i class="bi bi-chevron-left"></i></a></li>
+
+                  {% endif %}
+                  
+                  {% for i in range(1, total_pages+1) %}
+                        <li class="page-item {% if i==page%}active{% endif %}">
+                          <a class="page-link"  href="{{url_for('articles', page=i)}}">{{i}}</a></li>
+                  {% endfor %}<!--mevcut ve aktif sayfayı ve diğer sayfa numaralarını gösterme-->
+                  
+                  {% if page<total_pages %}<!--son sayfadaysa sonraki görünmez-->
+                  
+                    <li class="page-item">
+                        <a class="page-link"  href="{{url_for('articles',page=page+1)}}">
+                            <i class="bi bi-chevron-right"></i></a></li>
+
+                  {% endif %}     
+                </ul>
+              </div>
+            </div>
+
+          </section><!-- /Pagination 2 Section -->
+
+        </div>
+
+        <div class="col-lg-4 sidebar">
+
+          <div class="widgets-container" data-aos="fade-up" data-aos-delay="200">
+
+            <!-- Search Widget -->
+            <div class="search-widget widget-item">
+
+              <h3 class="widget-title">Makale Ara</h3>
+              <form action="/search" method="POST">
+                <input type="text" name="keyword" maxlength="64">
+                <button type="submit" title="Ara"><i class="bi bi-search"></i></button>
+              </form>
+
+            </div><!--/Search Widget -->
+
+           
+
+            <!-- Recent Posts Widget -->
+            <div class="recent-posts-widget widget-item">
+
+              <h3 class="widget-title">Son İçerikler</h3>
+                {% for recent_post in recent_posts %}
+
+                      <div class="post-item">
+                        <img src="{{ url_for('static', filename='uploads/article_images/' + recent_post['article_image']) }}" alt="" class="flex-shrink-0">
+                        <div>
+                          <h4><a href="/article/{{recent_post.id}}">{{recent_post.title}}</a></h4>
+                          <time datetime="2020-01-01">{{recent_post.created_date}}</time>
+                        </div>
+                      </div><!-- End recent post item-->
+
+                
+                {% endfor %}
+              
+             
+             
+            </div><!--/Recent Posts Widget -->
+
+         
+
+          </div>
+
+        </div>
+
+  </main>
+
+{% endblock body %}

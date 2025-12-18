@@ -1,0 +1,34 @@
+{
+    "python.createEnvironment.trigger": "off",
+    "terminal.integrated.inheritEnv": false,
+    "emmet.includeLanguages": {
+        "html": "html",
+        "jinja-html": "html",
+        "django-html": "html"
+    },
+    "emmet.triggerExpansionOnTab": true,
+    "auto-close-tag.enableAutoCloseTag": true,
+    "auto-close-tag.activationOnLanguage": [
+        "html",
+        "xml",
+        "php",
+        "javascript",
+        "vue",
+        "typescriptreact",
+        "jinja-html",
+        "django-html"
+    ],
+    "html.autoClosingTags": true,
+    "editor.autoClosingBrackets": "languageDefined",
+    "editor.autoClosingQuotes": "languageDefined",
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "files.associations": {
+        "*.html": "html",
+        "*.htm": "html",
+        "*.jinja": "jinja-html",
+        "*.jinja2": "jinja-html",
+        "*.tpl": "jinja-html",
+        "*.djhtml": "django-html"
+    }
+}

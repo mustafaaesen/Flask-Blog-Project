@@ -1,0 +1,8 @@
+Flask
+Flask-MySQLdb
+mysqlclient
+WTForms
+Flask-WTF
+email-validator
+passlib
+Flask-Limiter

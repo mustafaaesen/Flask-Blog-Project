@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+      <main class="main">
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 mb-5">
+          
+
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
+            <div class="info-card">
+              <div class="icon-box">
+                <i class="bi bi-envelope-at-fill"></i>
+              </div>
+              <h3>İletişim</h3>
+              <p>Siz de aklınıza takılanlar,görüş,öneri ve istekleriniz için<br>
+                aşağıdaki formu doldurarak iletişime geçilirsiniz</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-wrapper" data-aos="fade-up" data-aos-delay="400">
+              <form action="{{ url_for('contact') }}" method="post" role="form" class="php-email-form">
+              
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-person"></i></span>
+                       {{ form.name(class="form-control", placeholder="Ad Soyad") }}
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                       {{ form.email(class="form-control", placeholder="E-Posta Adresi") }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-6 form-group">
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                       {{ form.phone(class="form-control", placeholder="Telefon Numarası") }}
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-list"></i></span>
+                      {{ form.service(class="form-select") }}
+                    </div>
+                  </div>
+                  <div class="form-group mt-3">
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-chat-dots"></i></span>
+                      {{ form.message(class="form-control", placeholder="Mesajınızı yazın...", rows=4) }}
+                    </div>
+                  </div>
+                  <div class="my-3">
+                    <div class="loading">Yükleniyor</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Mesajını Başarı ile Gönderildi. Teşekkürler</div>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit">Gönder</button>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- /Contact Section -->
+
+  </main>
+
+{% endblock body %}

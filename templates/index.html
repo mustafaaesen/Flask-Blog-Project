@@ -1,0 +1,155 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <main class="main">
+
+
+     <!-- Call To Action 2 Section -->
+    <section id="call-to-action-2" class="call-to-action-2 section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="advertise-1 d-flex flex-column flex-lg-row gap-4 align-items-center position-relative">
+
+          <div class="content-left flex-grow-1" data-aos="fade-right" data-aos-delay="200">
+            <span class="badge text-uppercase mb-2">Kaçırma</span>
+            <h2>Dijital İçerik Deneyiminizi Bugün Güçlendirin</h2>
+            <p class="my-4">Blog platform, kullanıcıların içerik üretmesini, paylaşmasını ve birbirleriyle etkileşime geçmesini kolaylaştırır.
+Basit, hızlı ve modern bir arayüz ile makalelerinizi yayınlayabilir, yorum alabilir ve toplulukla bağlantı kurabilirsiniz.
+Kodlama bilmeden yazılarınızı yönetmek hiç bu kadar kolay olmamıştı.</p>
+
+            <div class="features d-flex flex-wrap gap-3 mb-4">
+              <div class="feature-item">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>Kolay Kullanım</span>
+              </div>
+              <div class="feature-item">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>Esnek Yapı</span>
+              </div>
+              <div class="feature-item">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>Gerçek Zamanlı Takip</span>
+              </div>
+            </div>
+
+            <div class="cta-buttons d-flex flex-wrap gap-3">
+              <a href="/register" class="btn btn-primary">Ücretsiz Kayıt Ol</a>
+              <a href="/about" class="btn btn-outline">Daha fazlası</a>
+            </div>
+          </div>
+
+          <div class="content-right position-relative" data-aos="fade-left" data-aos-delay="300">
+            <img src="{{ url_for('static', filename='assets/img/flask.svg') }}" alt="Digital Platform" class="img-fluid rounded-4">
+            <div class="floating-card">
+              <div class="card-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <div class="card-content">
+                <span class="stats-number">1000+</span>
+                <span class="stats-text">Kullanıcı</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="decoration">
+            <div class="circle-1"></div>
+            <div class="circle-2"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Call To Action 2 Section -->
+
+
+
+    <!-- Featured Posts Section -->
+    <section id="featured-posts" class="featured-posts section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>ÖNE ÇIKAN İÇERİKLER</h2>
+        <div><span>YENİ İÇERİKLERİ</span> <span class="description-title">KONTROL EDİN</span></div>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="blog-posts-slider swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 800,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": 3,
+              "spaceBetween": 30,
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 20
+                },
+                "768": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 20
+                },
+                "1200": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 30
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+          {% for article in articles %}
+          
+              
+                <div class="swiper-slide">
+                  <div class="blog-post-item" style="position: relative;">
+                    <img src="{{ url_for('static', filename='uploads/article_images/' + article['article_image']) }}" alt="Blog Image">
+                    <div class="blog-post-content">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-person"></i>{{article.author}}</span>
+                        <span class="divider">•</span>
+                        <span><i class="bi bi-clock"></i> {{article.created_date}}</span>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-chat-dots"></i> {{article.comment_count}}</span>
+                        <span class="divider">•</span>
+                        <span class="reading-time"><i class="bi bi-clock"></i>{{article.reading_time}} dakika</span>
+                      </div>
+
+                      <h2><strong><a href="/article/{{article.id}}">{{article.title}}</a></strong></h2>
+                      <p>{{ article.content | striptags | truncate(80, True, '...') }}</p>
+                      <a href="/article/{{article.id}}" class="read-more">Devamını Oku <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div><!-- End slide item -->
+              
+
+          {% endfor %}
+          </div>
+         
+
+        </div>
+
+      </div>
+
+    </section><!-- /Featured Posts Section -->
+
+
+   
+   
+ 
+
+  </main>
+
+  
+
+  
+
+ 
+
+{% endblock  %}

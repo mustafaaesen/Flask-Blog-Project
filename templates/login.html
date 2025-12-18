@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% from "includes/formhelpers.html" import render_field %}
+    <!---form helpersı içererek alma-->
+
+       </section><!-- /Blog Comments Section -->
+
+          <!-- Blog Comment Form Section -->
+          <section id="blog-comment-form" class="blog-comment-form section">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+              <form method="post" role="form">
+                
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+
+                <div class="section-header">
+                  <h3>Giriş Yapın</h3>
+                  <p>Hesabınıza erişebilmek için giriş yapın</p>
+                </div>
+
+                <div class="row gy-3">
+                  <div class="col-md-6 form-group">
+                   
+                    {{ render_field(form.username,class="form-control",placeholder="Kullanıcı Adınız") }}
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    
+                   {{ render_field(form.password,class="form-control",placeholder="Parolanız") }}
+                  </div>
+
+                  <div class="col-12 text-center">
+                    <div class="col-12 text-center mt-3">
+                           <p>Hesabınız yok mu ? 
+                            <a href="{{ url_for('register') }}" style="color: var(--accent-color); font-weight: 500;">
+                            Hemen kayıt olun
+                             </a>
+                                </p>
+                            </div>
+
+                    <button type="submit" class="btn-submit">Giriş Yap</button>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+
+          </section><!-- /Blog Comment Form Section -->
+        
+    
+
+      
+
+{% endblock body %}

@@ -1,0 +1,170 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+
+<!---kullanıcnın makalesi var mı yok mu kontrolü vasrsa fonksiyondan gelceği için gösterili yoksa gsterilmez--->
+  <main class="main">
+
+    <!-- Author Profile Section -->
+    <section id="author-profile" class="author-profile section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="author-profile-1">
+
+          <div class="row">
+            <!-- Author Info -->
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="author-card" data-aos="fade-up">
+                <div class="author-image">
+                  <img src="{{ url_for('static', filename='uploads/profile_pics/' + user['profile_pic']) }}" alt="Author" class="img-fluid rounded">
+
+
+                </div>
+
+                <div class="author-info">
+                  <h2><small>Hoşgeldin</small><br>{{session["username"]}}</h2>
+                  <p class="designation">{{user.job}}</p>
+
+                  <div class="author-bio">
+                    Buradan yeni makale yayınlayabilir,profil bilgilerini güncelleyebilirsiniz.
+                  </div>
+                  <div class="call-to-action-2">
+                    <div class="cta-buttons d-flex justify-content-center">
+                      <a href="/addarticle" class="btn btn-primary">Makale Ekle</a>                    
+                    </div>
+                    <br>
+                    <br>
+                    <div class="cta-buttons d-flex justify-content-center">
+                      <a href="/editprofile/{{user.id}}" class="btn btn-primary">Profili Güncelle</a>                    
+                    </div>                    
+                </div>
+
+                  
+                  <div class="author-stats  text-center my-4">
+                    <div class="stat-item">
+                      <h4 data-purecounter-start="0" data-purecounter-end="{{article_count}}" data-purecounter-duration="1" class="purecounter"></h4>
+                      <p>Yayınladığınız Makale Sayısı</p>
+                    </div>
+                   
+                   </div>
+
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Author Content -->
+            <div class="col-lg-8">
+              <div class="author-content" data-aos="fade-up" data-aos-delay="200">
+                <div class="content-header">
+                  <h3>Hakkında</h3>
+                </div>
+                <div class="content-body">
+                  <p>Buradan yayınladığın makaleleri görüntüleyebilir,düzenleyebilir veya silebilirsiniz.</p>
+
+
+{% if articles %}<!--makalesi varsa kullanıcnın yazdığı makaleleri tablo halinde 
+ve düzenlenebilir şekilde gösterme yöntemi-->
+
+              <div class="featured-articles mt-5">
+                    <h4>Yayınladığınız Makaleler</h4>
+                    <div class="row g-4">
+                 
+   
+   {% for article in articles %}
+        
+
+                      <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <article class="article-card">
+                          <div class="article-img">
+                            <img src="{{ url_for('static', filename='uploads/article_images/' + article['article_image']) }}" alt="Article" class="img-fluid">
+                          </div>
+                          <div class="article-details">
+                            <div class="d-flex justify-content-center gap-2">
+                              <div class="post-category"><a href="/edit/{{article.id}}">Güncelle</a></div>
+                              <div class="post-category"><a href="/delete/{{article.id}}">Sil</a></div>
+                            </div>
+                            <h5><a href="/article/{{article.id}}">{{article.title}}</a></h5>
+                            <div class="post-meta">
+                              <span><i class="bi bi-clock"></i>{{article.created_date}}</span>
+                              <span><i class="bi bi-chat-dots"></i>{{article.comment_count}}</span>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+
+   
+   {% endfor %}
+
+    <!-- Pagination 2 Section -->
+      <section id="pagination-2" class="pagination-2 section">
+
+            <div class="container">
+              <div class="d-flex justify-content-center">
+                <ul class="pagination">
+
+                  {% if page>1 %}<!--sayfa sayısı 1 den büyükse önceki butonu görünür-->
+                  
+                     <li>
+                        <a class="page-link" href="{{url_for('dashboard',page=page-1)}}">
+                            <i class="bi bi-chevron-left"></i></a></li>
+
+                  {% endif %}
+                  
+                  {% for i in range(1, total_pages+1) %}
+                        <li class="page-item {% if i==page%}active{% endif %}">
+                          <a class="page-link"  href="{{url_for('dashboard', page=i)}}">{{i}}</a></li>
+                  {% endfor %}<!--mevcut ve aktif sayfayı ve diğer sayfa numaralarını gösterme-->
+                  
+                  {% if page<total_pages %}<!--son sayfadaysa sonraki görünmez-->
+                  
+                    <li class="page-item">
+                        <a class="page-link"  href="{{url_for('dashboard',page=page+1)}}">
+                            <i class="bi bi-chevron-right"></i></a></li>
+
+                  {% endif %}     
+                </ul>
+              </div>
+            </div>
+
+          </section><!-- /Pagination 2 Section -->
+   <!--
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>-->
+
+
+  </tbody>
+</table>
+
+{% else %}
+
+<div class="alert alert-danger">Henüz Makaleniz Bulunmuyor</div>
+
+{% endif %}
+
+
+
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Author Profile Section -->
+
+  </main>
+
+{% endblock body %}

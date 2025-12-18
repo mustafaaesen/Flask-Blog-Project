@@ -1,0 +1,261 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<main class="main">
+  <div class="container">
+    <div class="row">
+
+      <!-- ====== SOL SÜTUN (MAKALE DETAY + YORUMLAR) ====== -->
+      <div class="col-lg-8">
+
+        {% if article %}
+        <!-- ================= Blog Details Section ================= -->
+        <section id="blog-details" class="blog-details section" data-aos="fade-up">
+          <article class="article">
+
+            <!-- Hero Görsel -->
+            <div class="hero-img" data-aos="zoom-in">
+              <img src="{{ url_for('static', filename='uploads/article_images/' + article['article_image']) }}" 
+                   alt="Featured blog image" class="img-fluid" loading="lazy">
+              <div class="meta-overlay">
+                <div class="meta-categories">
+                  {% if article.interest_area %}
+                    <a href="#" class="category">{{ article.interest_area }}</a>
+                  {% else %}
+                    <a href="#" class="category">İlgi alanı belirtilmemiş</a>
+                  {% endif %}
+                  <span class="divider">•</span>
+                  <span class="reading-time"><i class="bi bi-clock"></i> okuma süresi: {{ read_time }} dakika</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- İçerik -->
+            <div class="article-content" data-aos="fade-up" data-aos-delay="100">
+              <div class="content-header">
+                <h1 class="title">{{ article.title }}</h1>
+
+                <div class="author-info">
+                  <div class="author-details">
+                    <img src="{{ url_for('static', filename='uploads/profile_pics/' + article['profile_pic']) }}" 
+                         alt="Author" class="author-img">
+                    <div class="info">
+                      <h4>{{ article.author }}</h4>
+                      <span class="role">{{ article.job }}</span>
+                    </div>
+                  </div>
+
+                  <div class="post-meta">
+                    <span class="date"><i class="bi bi-calendar3"></i> {{ article.created_date }}</span>
+                    <span class="divider">•</span>
+                    <span class="comments"><i class="bi bi-chat-text"></i> {{ comment_count }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="content">
+                {{ article.content | safe }}
+              </div>
+
+              <!-- Paylaşım -->
+              <div class="meta-bottom">
+                <div class="share-section">
+                  <h4>Makaleyi Paylaş</h4>
+                  <div class="social-links">
+                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}" target="_blank" class="twitter" title="Twitter'da Paylaş">
+                      <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" class="facebook" title="Facebook'ta Paylaş">
+                      <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" title="LinkedIn'de Paylaş">
+                      <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="#" onclick="copyToClipboard(event, '{{ request.url }}')" title="Bağlantıyı Kopyala">
+                      <i class="bi bi-link-45deg"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+        <!-- ================= /Blog Details Section ================= -->
+
+        {% else %}
+          <div class="alert alert-warning">Böyle bir makale bulunmuyor.</div>
+        {% endif %}
+
+
+        <!-- ================= Blog Comments Section ================= -->
+        <section id="blog-comments" class="blog-comments section" data-aos="fade-up" data-aos-delay="100">
+          <div class="blog-comments-3">
+
+            <div class="section-header">
+              <h3>Yorumlar <span class="comment-count">({{ comment_count }})</span></h3>
+            </div>
+
+            {% if comment_count == 0 %}
+              <div class="alert alert-warning">Bu makaleye henüz yorum yapılmamış. İlk siz olun!</div>
+            {% else %}
+              {% for comment in comments if not comment.parent_id %}
+              <article class="comment-card">
+                <div class="comment-header">
+                  <div class="user-info">
+                    <img src="{{ url_for('static', filename='uploads/profile_pics/' + comment.profile_pic) }}" alt="User avatar" loading="lazy">
+                    <div class="meta">
+                      <h4 class="name">{{ comment.username }}</h4>
+                      <span class="date"><i class="bi bi-calendar3"></i> {{ comment.created_date }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="comment-content">
+                  <p>{{ comment.content }}</p>
+                </div>
+
+                <div class="comment-actions">
+                  <button class="action-btn reply-btn"
+                          data-id="{{ comment.id }}"
+                          data-user="{{ comment.username }}">
+                    <i class="bi bi-reply"></i><span>Yanıtla</span>
+                  </button>
+                </div>
+
+                <!-- Yanıtlar -->
+                <div class="reply-thread">
+                  {% for reply in comments if reply.parent_id == comment.id %}
+                    <article class="comment-card reply">
+                      <div class="comment-header">
+                        <div class="user-info">
+                          <img src="{{ url_for('static', filename='uploads/profile_pics/' + reply.profile_pic) }}" alt="User avatar" loading="lazy">
+                          <div class="meta">
+                            <h4 class="name">{{ reply.username }}</h4>
+                            <span class="date"><i class="bi bi-calendar3"></i> {{ reply.created_date }}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="comment-content">
+                        <p>{{ reply.content }}</p>
+                      </div>
+                      <div class="comment-actions">
+                        <button class="action-btn reply-btn"
+                                data-id="{{ reply.id }}"
+                                data-user="{{ reply.username }}">
+                          <i class="bi bi-reply"></i><span>Yanıtla</span>
+                        </button>
+                      </div>
+                    </article>
+                  {% endfor %}
+                </div>
+              </article>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </section>
+        <!-- ================= /Blog Comments Section ================= -->
+
+
+        <!-- ================= Blog Comment Form Section ================= -->
+        <section id="blog-comment-form" class="blog-comment-form section" data-aos="fade-up" data-aos-delay="100">
+          <form id="comment-form" action="{{ url_for('comment', article_id=article.id) }}" method="post" role="form">
+            
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="parent_id" id="parent_id" value="">
+
+            <div class="section-header">
+              <h3 id="formTitle">Yorum Yapın</h3>
+              <p id="formHint">Siz de giriş yaparak bu makaleye yorum bırakabilirsiniz.</p>
+            </div>
+
+            <div class="row gy-3">
+              <div class="col-12 form-group">
+                <label for="comment">Yorumunuz *</label>
+                <textarea class="form-control" name="comment" id="comment" rows="5"
+                          placeholder="Yorumunuzu yazın..." required></textarea>
+              </div>
+
+              <div class="col-12 text-center">
+                <button type="submit" class="btn-submit">Yorumu Gönder</button>
+                <button type="button" id="cancelReply" class="btn btn-sm btn-outline-secondary ms-2" style="display:none;">
+                  Yanıtlamayı İptal Et
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+        <!-- ================= /Blog Comment Form Section ================= -->
+
+      </div> <!-- /col-lg-8 -->
+
+
+      <!-- ====== SAĞ SÜTUN (SIDEBAR) ====== -->
+      <div class="col-lg-4 sidebar">
+        <div class="widgets-container" data-aos="fade-up" data-aos-delay="200">
+
+          <!-- Search Widget -->
+          <div class="search-widget widget-item">
+            <h3 class="widget-title">Ara</h3>
+            <form action="/search" method="POST">
+              <input type="text" name="keyword" maxlength="64">
+              <button type="submit" title="Ara"><i class="bi bi-search"></i></button>
+            </form>
+          </div>
+
+          <!-- Recent Posts Widget -->
+          <div class="recent-posts-widget widget-item">
+            <h3 class="widget-title">Son İçerikler</h3>
+            {% for recent_post in recent_posts %}
+            <div class="post-item">
+              <img src="{{ url_for('static', filename='uploads/article_images/' + recent_post['article_image']) }}" 
+                   alt="" class="flex-shrink-0">
+              <div>
+                <h4><a href="/article/{{ recent_post.id }}">{{ recent_post.title }}</a></h4>
+                <time datetime="{{ recent_post.created_date }}">{{ recent_post.created_date }}</time>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div> <!-- /col-lg-4 -->
+
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+</main>
+
+
+<!-- Yanıt formu JS -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const replyButtons = document.querySelectorAll(".reply-btn");
+  const parentInput = document.getElementById("parent_id");
+  const form = document.getElementById("comment-form");
+  const formTitle = document.getElementById("formTitle");
+  const formHint = document.getElementById("formHint");
+  const cancelReply = document.getElementById("cancelReply");
+
+  replyButtons.forEach(btn => {
+    btn.addEventListener("click", function() {
+      const parentId = this.dataset.id;
+      const user = this.dataset.user;
+
+      parentInput.value = parentId;
+      formTitle.textContent = `${user} kullanıcısına yanıt veriyorsunuz`;
+      formHint.textContent = "Yanıtınızı yazdıktan sonra gönderin.";
+      cancelReply.style.display = "inline-block";
+
+      form.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  cancelReply.addEventListener("click", function() {
+    parentInput.value = "";
+    formTitle.textContent = "Yorum Yapın";
+    formHint.textContent = "Siz de giriş yaparak bu makaleye yorum bırakabilirsiniz.";
+    cancelReply.style.display = "none";
+  });
+});
+</script>
+
+{% endblock body %}
