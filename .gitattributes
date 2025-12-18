@@ -1,3 +1,5 @@
-static/** linguist-vendored
-templates/** linguist-vendored
+# Ignore only third-party frontend assets
+static/vendor/** linguist-vendored
+static/css/bootstrap*.css linguist-vendored
+static/css/*.min.css linguist-vendored
 
