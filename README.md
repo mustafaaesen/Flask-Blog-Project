@@ -10,6 +10,13 @@ MySQL veritabanı ile veri etkileşimi ve Jinja2 template’leri üzerinden HTML
 şeklinde bir akışa sahiptir. Geliştirme ve canlı ortam ayarları birbirinden ayrıdır ve hassas
 bilgiler doğrudan kod içinde tutulmaz.
 
+
+PROJENİN CANLI HALİNİ GÖRMEK İÇİN
+---><a href="https://flaskblog.pythonanywhere.com/" target="_blank">
+     Live Demo – Flask Blog
+</a>
+bağlantıyı takip edebilirsiniz.
+
 ![Architecture](screenshots/flaskblog.png)
 
 ## Gereksinimler
