@@ -18,11 +18,13 @@ PROJENİN CANLI HALİNİ GÖRMEK İÇİN AŞAĞIDAKİ BAĞLANTIYI ZİYARET EDEB�
 <br>
 
 <a href="https://flaskblog.pythonanywhere.com/" target="_blank">
-    👉 Live Demo – Flask Blog
+    👉 <strong>Live Demo – Flask Blog</strong>
 </a>
 
+<br><br>
 
 ![Architecture](screenshots/flaskblog.png)
+
 
 ## Gereksinimler
 Python 3.x  
