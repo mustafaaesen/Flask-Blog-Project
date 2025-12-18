@@ -11,11 +11,16 @@ MySQL veritabanı ile veri etkileşimi ve Jinja2 template’leri üzerinden HTML
 bilgiler doğrudan kod içinde tutulmaz.
 
 
-PROJENİN CANLI HALİNİ GÖRMEK İÇİN
----><a href="https://flaskblog.pythonanywhere.com/" target="_blank">
-     Live Demo – Flask Blog
+## 🔗 PROJENİN CANLI HALİ
+
+PROJENİN CANLI HALİNİ GÖRMEK İÇİN AŞAĞIDAKİ BAĞLANTIYI ZİYARET EDEBİLİRSİNİZ.
+
+<br>
+
+<a href="https://flaskblog.pythonanywhere.com/" target="_blank">
+    👉 Live Demo – Flask Blog
 </a>
-bağlantıyı takip edebilirsiniz.
+
 
 ![Architecture](screenshots/flaskblog.png)
 
