@@ -33,7 +33,7 @@ app.config["UPLOAD_FOLDER"]="static/uploads/profile_pics"
 app.config["ARTICLE_IMAGE_FOLDER"]="static/uploads/article_images"
 
 
-app.secret_key="blog"
+app.secret_key = os.environ.get("SECRET_KEY")
 csrf = CSRFProtect(app)
 mysql=MySQL(app)# nesne türetilerek uygulmaya bağlantıyı tamamlama
 
